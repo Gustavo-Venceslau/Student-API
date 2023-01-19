@@ -1,7 +1,6 @@
 import { client } from "../../db/mongoDb";
 import { StudentCollec } from "../../db/mongoDbDocuments/StudentDocument";
 import { Student } from "../../entities/Student";
-import { IUpdateStudentRequestDTO } from "../../useCases/updateStudent/UpdateStudentDTO";
 import { IStudentRepository } from "../IStudentRepository";
 
 export class StudentRepository implements IStudentRepository{

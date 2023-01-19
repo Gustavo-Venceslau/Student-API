@@ -6,13 +6,14 @@ export class UpdateStudentUseCase {
         private StudentRepository: IStudentRepository
     ){}
 
-    async execute(data: IUpdateStudentRequestDTO){
-        const studentExists = await this.StudentRepository.findByEmail(data.email);
+    async execute(data: IUpdateStudentRequestDTO,  email: string){
+        const studentExists = await this.StudentRepository.findByEmail(email);
 
         if(!studentExists){
             throw new Error('Student not exists');
         }
-
-        await this.StudentRepository.update(data.email, data)
+        else{
+            await this.StudentRepository.update(email, data)
+        }       
     }
 }

@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { UpdateStudentUseCase } from "./UpdateStudentUseCase";
 
 export class UpdateStudentController {
@@ -7,20 +7,20 @@ export class UpdateStudentController {
         private updateStudentUseCase: UpdateStudentUseCase 
     ){}
 
-    async hadle(request: Request, response: Response){
+    async hadle(request: Request, response: Response, next: NextFunction): Promise<Response>{
         const { name, email, password } = request.body;
+
+        const StudentEmail = request.params.email;
 
         try{
             await this.updateStudentUseCase.execute({
                 name,
                 email,
                 password
-            });
-            response.status(200).send();
+            }, StudentEmail);
+            return response.status(200).send();
         }catch(err){
-            return response.status(400).json({
-                message: err.message || 'Unxpected error'
-            });
+            next(err)
         }
     }
 }

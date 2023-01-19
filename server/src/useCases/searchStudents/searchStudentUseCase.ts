@@ -8,7 +8,7 @@ export class SearchStudentUseCase{
         private studentRepository: IStudentRepository
     ){}
 
-    async execute(data: ISeachStudentRequestDTO): Promise<Student>{
+    async execute(data: ISeachStudentRequestDTO,): Promise<Student>{
         const findedStundet = await this.studentRepository.findByEmail(data.studentEmail);
 
         if(!findedStundet){

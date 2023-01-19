@@ -1,4 +1,4 @@
-import { Request, Response, Router } from "express";
+import { NextFunction, Request, Response, Router } from "express";
 import { createStudentController } from "./useCases/createStudent";
 import { deleteStudentController } from "./useCases/deleteStudent";
 import { searchStudentController } from "./useCases/searchStudents";
@@ -6,17 +6,17 @@ import { updateStundentController } from "./useCases/updateStudent";
 
 const router = Router();
 
-router.post('/student', (request: Request, response: Response) => {
-    return createStudentController.handle(request, response);
+router.post('/student', (request: Request, response: Response, next: NextFunction) => {
+    return createStudentController.handle(request, response, next);
 })
-router.get('/student/:email', (request: Request, response: Response) => {
-    return searchStudentController.handle(request,response);
+router.get('/student/:email', (request: Request, response: Response, next: NextFunction) => {
+    return searchStudentController.handle(request,response, next);
 })
-router.put('/student/:email', (request: Request, response: Response) => {
-    return updateStundentController.hadle(request,response);
+router.put('/student/:email', (request: Request, response: Response, next: NextFunction) => {
+    return updateStundentController.hadle(request,response, next);
 });
-router.delete('/student/:email', (request: Request, response: Response) => {
-    return deleteStudentController.handle(request, response);
+router.delete('/student/:email', (request: Request, response: Response, next: NextFunction) => {
+    return deleteStudentController.handle(request, response, next);
 });
 
 export { router }
