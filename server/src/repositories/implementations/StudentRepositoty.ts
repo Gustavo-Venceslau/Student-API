@@ -8,7 +8,7 @@ export class StudentRepository implements IStudentRepository{
     async findByEmail(email: string): Promise<Student> {
         const query = { email: email }
         await client.connect();
-        const data = await StudentCollec.findOne(query);
+        const data = await StudentCollec.findOne(query)
         await client.close()
         return data;
     }
